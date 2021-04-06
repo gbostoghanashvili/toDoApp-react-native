@@ -1,30 +1,27 @@
 import React, {useState} from 'react';
-import {
-  View,
-  TextInput,
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  Alert,
-  Dimensions,
-} from 'react-native';
+import { View, TextInput, TouchableOpacity, Text, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useDispatch } from 'react-redux';
 
-const windowWidth = Dimensions.get('window').width;
+import {addTask} from "../../redux/action";
+
+import {styles } from "./styles";
 
 import {generateID} from '../../functions';
 
-const Input = ({appendTask}) => {
+const Input = () => {
   const [text, setText] = useState('');
   const onChange = textValue => setText(textValue);
-  const addTask = () => {
+  const dispatch = useDispatch()
+  const appendTask = () => {
     const task = {
       title: text,
+      isCompleted: false,
       id: generateID(),
     };
     setText('');
     if (text.trim()) {
-      appendTask(task);
+      dispatch(addTask(task))
     } else {
       Alert.alert('Error', 'Empty Input', 'Ok');
     }
@@ -36,9 +33,9 @@ const Input = ({appendTask}) => {
         placeholder="Add task.."
         onChangeText={onChange}
         value={text}
-        maxLength={40}
+        maxLength={35}
       />
-      <TouchableOpacity style={styles.button} onPress={() => addTask()}>
+      <TouchableOpacity style={styles.button} onPress={() => appendTask()}>
         <Text>
           <Icon name="plus-circle" size={30} color={'green'} />
         </Text>
@@ -46,28 +43,5 @@ const Input = ({appendTask}) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  input: {
-    height: 50,
-    width: windowWidth - 80,
-    fontSize: 22,
-    paddingLeft: 10,
-    marginLeft: 20,
-    marginTop: 10,
-    borderWidth: 1,
-    borderColor: '#eee',
-    borderRadius: 5,
-  },
-  button: {
-    paddingRight: 20,
-    marginTop: 10,
-  },
-});
 
 export default Input;
