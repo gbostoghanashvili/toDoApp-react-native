@@ -15,7 +15,7 @@ const Login = ({navigation}) => {
       />
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('Main')}>
+        onPress={() => navigation.navigate('Tabs')}>
         <Text style={styles.buttonText}>Login </Text>
       </TouchableOpacity>
       <View style={styles.dontHaveAnAccountView}>

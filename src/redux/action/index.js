@@ -2,7 +2,8 @@ export const actionTypes = {
   add: 'add',
   remove: 'remove',
   editTitle: 'editTitle',
-  editCompletionStatus: 'editCompletion'
+  editCompletionStatus: 'editCompletion',
+  showCompleted: 'showCompleted'
 }
 
 export const addTask = task => {

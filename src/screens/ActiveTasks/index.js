@@ -10,29 +10,29 @@ import CustomModal from "../../components/Modal";
 import {styles} from "./styles";
 import {tasksSelector} from "../../redux/selector";
 
-const Main = ({navigation}) => {
+const ActiveTasks = ({navigation}) => {
   const [modalIsVisible, setModalIsVisible] = useState(false);
   const tasks = useSelector(tasksSelector);
 
   const rowItems = tasks.map(task => {
-    return (
-      <Row
-        key={generateID()}
-        task={task}
-      />
-    );
+    if(!task.isCompleted) {
+      return (
+        <Row
+          key={generateID()}
+          task={task}
+        />
+      )}
   });
   const signOut = () => {
     setModalIsVisible(false)
     navigation.navigate('Login')
   }
-
   return (
     <ScrollView style={styles.container}>
       <TouchableOpacity style={styles.logoutButton} onPress={() => setModalIsVisible(true)}>
         <Text style={styles.buttonText}> Log Out</Text>
       </TouchableOpacity>
-      <Header />
+      <Header title={'Active Tasks'} />
       <Input />
       <View>{rowItems}</View>
       <CustomModal
@@ -46,5 +46,4 @@ const Main = ({navigation}) => {
   );
 };
 
-
-export default Main;
+export default ActiveTasks;
