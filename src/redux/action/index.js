@@ -1,7 +1,8 @@
 export const actionTypes = {
   add: 'add',
   remove: 'remove',
-  edit: 'edit',
+  editTitle: 'editTitle',
+  editCompletionStatus: 'editCompletion'
 }
 
 export const addTask = task => {
@@ -18,9 +19,18 @@ export const removeTask = id => {
   };
 };
 
-export const editTask = task => {
+export const editTaskTitle = (id, title) => {
   return {
-    type: actionTypes.edit,
-    payload: task
+    type: actionTypes.editTitle,
+    id,
+    title
+  };
+};
+
+export const editTaskCompletionStatus = (id, isCompleted) => {
+  return {
+    type: actionTypes.editCompletionStatus,
+    taskId: id,
+    isCompleted
   };
 };

@@ -7,9 +7,13 @@ const taskReducer = (state = [], action) => {
       return [action.payload, ...state];
     case actionTypes.remove:
       return state.filter(task => task.id !== action.payload);
-    case actionTypes.edit:
-      const {id, title, isCompleted} = action.payload
-      return state.map(task => task.id === id ? {...task, title, isCompleted} : task)
+    case actionTypes.editTitle:
+      const {id, title} = action
+      return state.map(task => task.id === id ? {...task, title} : task)
+    case actionTypes.editCompletionStatus:
+      const {taskId, isCompleted} = action
+      return state.map(task => task.id === taskId ? {...task, isCompleted} : task)
+
     default:
       return state;
   }

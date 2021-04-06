@@ -6,7 +6,7 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { useDispatch } from "react-redux";
 
 import { styles } from './styles'
-import { editTask, removeTask } from "../../redux/action";
+import { editTaskTitle, editTaskCompletionStatus, removeTask } from "../../redux/action";
 
 const Row = ({task}) => {
   const dispatch = useDispatch()
@@ -17,8 +17,7 @@ const Row = ({task}) => {
   const edit = () => {
     setEditMode(false);
     if (text.trim()) {
-      task.title = text
-      dispatch(editTask(task))
+      dispatch(editTaskTitle(task.id, text))
     } else {
       Alert.alert('Error', 'Empty Input', 'Ok');
     }
@@ -68,8 +67,7 @@ const Row = ({task}) => {
             iconStyle={styles.checkbox}
             isChecked={task.isCompleted}
             onPress={(isChecked: task.isCompleted) => {
-              task.isCompleted = !task.isCompleted
-              dispatch(editTask(task))
+              dispatch(editTaskCompletionStatus(task.id, !task.isCompleted))
             }}
             />
             <Text style={styles.text}>{task.title}</Text>
