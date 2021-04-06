@@ -12,6 +12,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",
     "@react-native-masked-view/masked-view": "^0.2.3",
+    "@react-navigation/material-bottom-tabs": "^5.3.15",
     "@react-navigation/native": "^5.9.4",
     "@react-navigation/stack": "^5.14.4",
     "formik": "^2.2.6",
@@ -19,6 +20,7 @@
     "react-native": "0.64.0",
     "react-native-bouncy-checkbox": "^2.0.0",
     "react-native-gesture-handler": "^1.10.3",
+    "react-native-paper": "^4.7.2",
     "react-native-reanimated": "^2.0.0",
     "react-native-safe-area-context": "^3.2.0",
     "react-native-screens": "^3.0.0",

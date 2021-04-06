@@ -13,7 +13,6 @@ const taskReducer = (state = [], action) => {
     case actionTypes.editCompletionStatus:
       const {taskId, isCompleted} = action
       return state.map(task => task.id === taskId ? {...task, isCompleted} : task)
-
     default:
       return state;
   }

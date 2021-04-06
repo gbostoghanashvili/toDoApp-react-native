@@ -1,14 +1,15 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import Main from './screens/Main';
-import Login from './screens/Login';
-import Registration from './screens/Registration';
 import {Provider} from  'react-redux'
 import { createStore } from 'redux';
-import reducers from "./redux/reducer";
-const store = createStore(reducers);
 
+import Login from './screens/Login';
+import Registration from './screens/Registration';
+import reducers from "./redux/reducer";
+import Tabs from "./screens/MainTabScreen";
+
+const store = createStore(reducers);
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -18,11 +19,6 @@ const App = () => {
        <Stack.Navigator initialRouteName="Login">
          <Stack.Screen
           options={{headerShown: false}}
-          name="Main"
-          component={Main}
-         />
-         <Stack.Screen
-          options={{headerShown: false}}
           name="Login"
           component={Login}
          />
@@ -30,6 +26,11 @@ const App = () => {
           options={{headerShown: false}}
           name="Registration"
           component={Registration}
+         />
+         <Stack.Screen
+           options={{headerShown: false}}
+           name="Tabs"
+           component={Tabs}
          />
         </Stack.Navigator>
      </NavigationContainer>
