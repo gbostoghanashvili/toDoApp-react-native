@@ -1,12 +1,15 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, TextInput, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CustomModal from "../Modal";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
+import { useDispatch } from "react-redux";
 
 import { styles } from './styles'
+import { editTask, removeTask } from "../../redux/action";
 
-const Row = ({task, deleteTask, editTask}) => {
+const Row = ({task}) => {
+  const dispatch = useDispatch()
   const [editMode, setEditMode] = useState(false);
   const [text, setText] = useState('');
   const [modalIsVisible, setModalIsVisible] = useState(false);
@@ -14,7 +17,8 @@ const Row = ({task, deleteTask, editTask}) => {
   const edit = () => {
     setEditMode(false);
     if (text.trim()) {
-      editTask(task.id, text);
+      task.title = text
+      dispatch(editTask(task))
     } else {
       Alert.alert('Error', 'Empty Input', 'Ok');
     }
@@ -24,7 +28,7 @@ const Row = ({task, deleteTask, editTask}) => {
     setEditMode(true);
   };
   const deleteItem = () => {
-    deleteTask(task.id);
+    dispatch(removeTask(task.id))
     setModalIsVisible(false);
   };
   return (
@@ -65,6 +69,7 @@ const Row = ({task, deleteTask, editTask}) => {
             isChecked={task.isCompleted}
             onPress={(isChecked: task.isCompleted) => {
               task.isCompleted = !task.isCompleted
+              dispatch(editTask(task))
             }}
             />
             <Text style={styles.text}>{task.title}</Text>
