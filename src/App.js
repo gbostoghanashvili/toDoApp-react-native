@@ -1,20 +1,33 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
-import type {Node} from 'react';
-import {Text, View} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import Main from './screens/Main';
+import Login from './screens/Login';
+import Registration from './screens/Registration';
 
-const App: () => Node = () => {
+const Stack = createStackNavigator();
+
+const App = () => {
   return (
-    <View>
-      <Text>Gela</Text>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="Main"
+          component={Main}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="Login"
+          component={Login}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="Registration"
+          component={Registration}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 

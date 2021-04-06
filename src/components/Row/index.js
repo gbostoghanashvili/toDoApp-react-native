@@ -7,12 +7,11 @@ import {
   TextInput,
   Alert,
   Dimensions,
-  Modal,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import CustomModal from "../Modal";
 
 const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
 
 const Row = ({task, deleteTask, editTask}) => {
   const [editMode, setEditMode] = useState(false);
@@ -35,6 +34,9 @@ const Row = ({task, deleteTask, editTask}) => {
     deleteTask(task.id);
     setModalIsVisible(false);
   };
+  const cancelAction = (v) => {
+    setModalIsVisible(v)
+  }
   return (
     <View>
       {editMode ? (
@@ -81,28 +83,13 @@ const Row = ({task, deleteTask, editTask}) => {
               </Text>
             </TouchableOpacity>
           </View>
-          <Modal
-            animationType="fade"
-            visible={modalIsVisible}
-            transparent={true}>
-            <View style={styles.modalView}>
-              <View style={styles.nestedModalView}>
-                <Text style={styles.modalText}>
-                  Are you sure you want to delete task?
-                </Text>
-                <TouchableOpacity
-                  onPress={() => deleteItem()}
-                  style={styles.deleteButton}>
-                  <Text style={styles.deleteButtonText}>Delete</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => setModalIsVisible(false)}
-                  style={styles.cancelButton}>
-                  <Text>Cancel</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </Modal>
+          <CustomModal
+           isVisible={modalIsVisible}
+           cancelAction={cancelAction}
+           action={deleteItem}
+           questionText={'Are you sure you want to delete task?'}
+           actionButtonText={'Delete'}
+          />
         </View>
       )}
     </View>
@@ -138,43 +125,6 @@ const styles = StyleSheet.create({
     height: 40,
     width: windowWidth - 90,
     paddingLeft: 10,
-  },
-  modalView: {
-    alignItems: 'center',
-    paddingTop: windowHeight - 200,
-    backgroundColor: 'rgba(0,0,0,0.4)',
-  },
-  nestedModalView: {
-    borderWidth: 1,
-    borderRadius: 15,
-    paddingTop: 20,
-    alignItems: 'center',
-    backgroundColor: 'white',
-    width: windowWidth,
-    height: 400,
-  },
-  cancelButton: {
-    alignItems: 'center',
-    borderWidth: 0.5,
-    padding: 10,
-    width: 200,
-    marginTop: 20,
-    borderRadius: 5,
-  },
-  deleteButton: {
-    alignItems: 'center',
-    borderWidth: 0.1,
-    padding: 10,
-    width: 200,
-    marginTop: 20,
-    borderRadius: 5,
-    backgroundColor: 'firebrick',
-  },
-  deleteButtonText: {
-    color: 'white',
-  },
-  modalText: {
-    fontSize: 20,
   },
 });
 

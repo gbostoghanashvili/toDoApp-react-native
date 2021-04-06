@@ -5,13 +5,12 @@ import {
   StyleSheet,
   TouchableOpacity,
   Text,
-  Alert,
   Dimensions,
 } from 'react-native';
 
 const windowWidth = Dimensions.get('window').width;
 
-const LoginView = () => {
+const Login = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.headLine}>TO DO LIST</Text>
@@ -23,12 +22,12 @@ const LoginView = () => {
       />
       <TouchableOpacity
         style={styles.button}
-        onPress={() => console.log('login button clicked')}>
+        onPress={() => navigation.navigate('Main')}>
         <Text style={styles.buttonText}>Login </Text>
       </TouchableOpacity>
       <View style={styles.dontHaveAnAccountView}>
         <Text>Dont have an account?</Text>
-        <TouchableOpacity onPress={() => console.log('login button clicked')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Registration')}>
           <Text style={styles.signUpButton}> Sign Up</Text>
         </TouchableOpacity>
       </View>
@@ -85,4 +84,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginView;
+export default Login;
