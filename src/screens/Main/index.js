@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
-import { StyleSheet, View, ScrollView, Text, TouchableOpacity } from "react-native";
+import { View, ScrollView, Text, TouchableOpacity } from "react-native";
+
 import Header from '../../components/Header';
 import Input from '../../components/Input';
 import Row from '../../components/Row';
 import {generateID} from '../../functions';
 import CustomModal from "../../components/Modal";
+import {styles} from "./styles";
 
 const Main = ({navigation}) => {
   const [tasks, setTasks] = useState([]);
@@ -37,9 +39,7 @@ const Main = ({navigation}) => {
     setModalIsVisible(false)
     navigation.navigate('Login')
   }
-  const cancelAction = (v) => {
-    setModalIsVisible(v)
-  }
+
   return (
     <ScrollView style={styles.container}>
       <TouchableOpacity style={styles.logoutButton} onPress={() => setModalIsVisible(true)}>
@@ -50,7 +50,7 @@ const Main = ({navigation}) => {
       <View>{rowItems}</View>
       <CustomModal
         isVisible={modalIsVisible}
-        cancelAction={cancelAction}
+        cancelAction={() => setModalIsVisible(false)}
         action={signOut}
         questionText={'Are you sure you want to Sign out?'}
         actionButtonText={'Sign Out'}
@@ -59,19 +59,5 @@ const Main = ({navigation}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: 40,
-  },
-  logoutButton: {
-    marginTop: 20,
-    marginBottom: 20,
-    marginLeft: 10,
-  },
-  buttonText: {
-    fontWeight: 'bold',
-    fontSize: 16,
-  }
-});
 
 export default Main;

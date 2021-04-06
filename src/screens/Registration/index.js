@@ -1,23 +1,16 @@
 import React from "react";
-import {
-  View,
-  TextInput,
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  Alert,
-  Dimensions,
-} from "react-native";
+import { View, TextInput, TouchableOpacity, Text } from "react-native";
 import { Formik } from "formik";
 import * as yup from 'yup';
 
-const windowWidth = Dimensions.get("window").width;
+import {styles} from "./styles";
+
 const regEx = {
   upperCase: /(?=.*[A-Z])/,
   numeric: /(?=.*[0-9])/
 }
 
-const signUpScema = yup.object().shape({
+const signUpSchema = yup.object().shape({
   username: yup.string()
   .min(4, '* Your username must contain at least 4 characters')
   .required('* Enter username'),
@@ -33,9 +26,10 @@ const signUpScema = yup.object().shape({
   .oneOf([yup.ref('password')], '* Passwords do not match')
   .required('* Confirm password'),
 });
+const initialValues = { username: "", email: "", password: "", confirmPassword: "" }
+
 
 const Registration = ({ navigation }) => {
-  const initialValues = { username: "", email: "", password: "", confirmPassword: "" }
   return (
     <View style={styles.container}>
       <Text style={styles.headLine}>Registration</Text>
@@ -43,8 +37,9 @@ const Registration = ({ navigation }) => {
         initialValues={initialValues}
         onSubmit={values => {
             console.log(values)
+            navigation.navigate('Login')
         }}
-        validationSchema={signUpScema}
+        validationSchema={signUpSchema}
 
       >{({ handleChange, values, handleSubmit, errors }) => (
           <View>
@@ -105,58 +100,6 @@ const Registration = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: "column",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingTop: 100,
-  },
-  headLine: {
-    fontWeight: "bold",
-    fontSize: 30,
-    marginBottom: 40,
-  },
-  input: {
-    width: windowWidth - 60,
-    height: 40,
-    borderWidth: 0.5,
-    borderRadius: 5,
-    marginTop: 10,
-    paddingLeft: 10,
-  },
-  button: {
-    width: windowWidth - 60,
-    height: 40,
-    borderWidth: 0.5,
-    borderRadius: 5,
-    padding: 10,
-    marginTop: 30,
-    marginLeft: 5,
-    backgroundColor: "rgba(0,0,0,0.2)",
-  },
-  buttonText: {
-    textAlign: "center",
-    fontWeight: "bold",
-    fontSize: 16,
-  },
-  dontHaveAnAccountView: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingTop: 10,
-  },
-  signUpButton: {
-    fontWeight: "bold",
-    fontSize: 16,
-  },
-  dontHaveAnAccountText: {
-    fontSize: 16,
-  },
-  errorMessage: {
-    marginTop: 1,
-    fontSize: 10,
-    color: 'red',
-  },
-});
+
 
 export default Registration;
