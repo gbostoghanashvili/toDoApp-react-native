@@ -1,11 +1,12 @@
 import { Dimensions, StyleSheet } from "react-native";
-const windowWidth = Dimensions.get('window').width;
+
+const windowWidth = Dimensions.get("window").width;
 
 export const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   input: {
     height: 50,
@@ -15,7 +16,7 @@ export const styles = StyleSheet.create({
     marginLeft: 20,
     marginTop: 10,
     borderWidth: 1,
-    borderColor: '#eee',
+    borderColor: "#eee",
     borderRadius: 5,
   },
   button: {

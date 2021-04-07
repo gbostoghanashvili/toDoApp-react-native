@@ -1,6 +1,6 @@
 import React from "react";
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 import ActiveTasks from "../ActiveTasks";
 import CompletedTasks from "../CompletedTasks";
@@ -12,13 +12,13 @@ function Tabs() {
     <Tab.Navigator
       initialRouteName="ActiveTasks"
       activeColor="green"
-      barStyle={{ backgroundColor: 'lightgrey' }}
+      barStyle={{ backgroundColor: "lightgrey" }}
     >
       <Tab.Screen
         name="Feed"
         component={ActiveTasks}
         options={{
-          tabBarLabel: 'Active',
+          tabBarLabel: "Active",
           tabBarIcon: ({ color }) => (
             <Icon name="circle-thin" color={color} size={26} />
           ),
@@ -28,7 +28,7 @@ function Tabs() {
         name="Notifications"
         component={CompletedTasks}
         options={{
-          tabBarLabel: 'Completed',
+          tabBarLabel: "Completed",
           tabBarIcon: ({ color }) => (
             <Icon name="check-square-o" color={color} size={26} />
           ),

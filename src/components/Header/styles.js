@@ -4,11 +4,11 @@ export const styles = StyleSheet.create({
   header: {
     height: 50,
     padding: 15,
-    backgroundColor: 'lightgrey',
+    backgroundColor: "lightgrey",
   },
   text: {
-    color: 'white',
+    color: "white",
     fontSize: 18,
-    textAlign: 'center',
+    textAlign: "center",
   },
 });
