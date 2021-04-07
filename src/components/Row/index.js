@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 
 import { styles } from './styles'
 import { editTaskTitle, editTaskCompletionStatus, removeTask } from "../../redux/action";
+import axios from "axios";
 
 const Row = ({task}) => {
   const dispatch = useDispatch()
@@ -17,7 +18,7 @@ const Row = ({task}) => {
   const edit = () => {
     setEditMode(false);
     if (text.trim()) {
-      dispatch(editTaskTitle(task.id, text))
+      updateTaskTitle()
     } else {
       Alert.alert('Error', 'Empty Input', 'Ok');
     }
@@ -27,9 +28,26 @@ const Row = ({task}) => {
     setEditMode(true);
   };
   const deleteItem = () => {
-    dispatch(removeTask(task.id))
-    setModalIsVisible(false);
+    axios.post(`http://0.0.0.0:4000/tasks/remove/${task._id}`)
+    .then(() => {
+      dispatch(removeTask(task._id))
+      setModalIsVisible(false);
+    })
+    .catch((err) => Alert.alert('Error', `${err.message}`, 'Ok'))
   };
+  const updateTaskTitle = () => {
+    axios.post(`http://0.0.0.0:4000/tasks/edit/${task._id}`, {title: text})
+      .then(() => {
+      dispatch(editTaskTitle(task._id, text))
+    })
+      .catch(err => Alert.alert('Error', `${err.message}`, 'Ok'))
+  }
+  const changeCompletionStatus = () => {
+    axios.post(`http://0.0.0.0:4000/tasks/check/${task._id}`, {isCompleted: !task.isCompleted})
+      .then(() => dispatch(editTaskCompletionStatus(task._id, !task.isCompleted))
+    )
+      .catch(err => Alert.alert('Error', `${err.message}`, 'Ok'))
+  }
   return (
     <View>
       {editMode ? (
@@ -66,9 +84,7 @@ const Row = ({task}) => {
             unfillColor="white"
             iconStyle={styles.checkbox}
             isChecked={task.isCompleted}
-            onPress={(isChecked: task.isCompleted) => {
-              dispatch(editTaskCompletionStatus(task.id, !task.isCompleted))
-            }}
+            onPress={() => changeCompletionStatus()}
             />
             <Text style={styles.text}>{task.title}</Text>
           </View>

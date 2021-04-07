@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { View, TextInput, TouchableOpacity, Text, Alert } from 'react-native';
 import axios from "axios";
+import { useDispatch } from "react-redux";
 
 import { styles } from "./styles";
+import { updateUserId } from "../../redux/action";
 
 const Login = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -10,10 +12,15 @@ const Login = ({navigation}) => {
 
   const onChangeEmail = textValue => setEmail(textValue);
   const onChangePassword = textValue => setPassword(textValue);
+  const dispatch = useDispatch()
 
   const logUserIn = () => {
     axios.post('http://0.0.0.0:4000/user/',{email, password})
-      .then(() => navigation.navigate('Tabs'))
+      .then((res) => {
+      const {id} = res.data
+        dispatch(updateUserId(id))
+        navigation.navigate('Tabs')
+    })
       .catch(() => Alert.alert('Error', 'Incorrect email or password', 'Ok'))
   }
   return (

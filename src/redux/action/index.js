@@ -3,13 +3,23 @@ export const actionTypes = {
   remove: 'remove',
   editTitle: 'editTitle',
   editCompletionStatus: 'editCompletion',
-  showCompleted: 'showCompleted'
+  showCompleted: 'showCompleted',
+  setTasks: 'setTasks',
+
+  updateId: 'updateId',
 }
 
 export const addTask = task => {
   return {
     type: actionTypes.add,
     payload: task
+  };
+};
+
+export const setTasks = tasks => {
+  return {
+    type: actionTypes.setTasks,
+    payload: tasks
   };
 };
 
@@ -33,5 +43,12 @@ export const editTaskCompletionStatus = (id, isCompleted) => {
     type: actionTypes.editCompletionStatus,
     taskId: id,
     isCompleted
+  };
+};
+
+export const updateUserId = id => {
+  return {
+    type: actionTypes.updateId,
+    payload: id
   };
 };

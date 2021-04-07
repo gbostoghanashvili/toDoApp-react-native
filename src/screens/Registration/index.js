@@ -42,7 +42,6 @@ const Registration = ({ navigation }) => {
       <Formik
         initialValues={initialValues}
         onSubmit={values => {
-            console.log(values.username, values.email, values.password)
           const {username, email, password} = values
           registerUser(username, email, password)
         }}
