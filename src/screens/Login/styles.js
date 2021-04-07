@@ -1,15 +1,16 @@
 import { Dimensions, StyleSheet } from "react-native";
-const windowWidth = Dimensions.get('window').width;
+
+const windowWidth = Dimensions.get("window").width;
 
 export const styles = StyleSheet.create({
   container: {
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "center",
     paddingTop: 100,
   },
   headLine: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 30,
     marginBottom: 40,
   },
@@ -29,20 +30,20 @@ export const styles = StyleSheet.create({
     padding: 10,
     marginTop: 30,
     marginLeft: 5,
-    backgroundColor: 'rgba(0,0,0,0.2)',
+    backgroundColor: "rgba(0,0,0,0.2)",
   },
   buttonText: {
-    textAlign: 'center',
-    fontWeight: 'bold',
+    textAlign: "center",
+    fontWeight: "bold",
     fontSize: 16,
   },
   dontHaveAnAccountView: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingTop: 10,
   },
   signUpButton: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 16,
   },
   dontHaveAnAccountText: {

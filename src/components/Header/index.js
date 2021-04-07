@@ -1,9 +1,9 @@
-import React from 'react';
-import {View, Text,} from 'react-native';
+import React from "react";
+import { View, Text } from "react-native";
 
-import {styles} from "./styles";
+import { styles } from "./styles";
 
-const Header = ({title}) => {
+const Header = ({ title }) => {
   return (
     <View style={styles.header}>
       <Text style={styles.text}>{title}</Text>

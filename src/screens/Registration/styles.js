@@ -1,4 +1,5 @@
 import { Dimensions, StyleSheet } from "react-native";
+
 const windowWidth = Dimensions.get("window").width;
 
 export const styles = StyleSheet.create({
@@ -51,6 +52,6 @@ export const styles = StyleSheet.create({
   errorMessage: {
     marginTop: 1,
     fontSize: 10,
-    color: 'red',
+    color: "red",
   },
 });

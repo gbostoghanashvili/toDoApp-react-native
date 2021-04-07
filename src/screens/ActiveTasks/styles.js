@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     marginLeft: 10,
   },
   buttonText: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 16,
-  }
+  },
 });
