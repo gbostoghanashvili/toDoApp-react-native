@@ -1,7 +1,8 @@
 import React from "react";
-import { View, TextInput, TouchableOpacity, Text } from "react-native";
+import { View, TextInput, TouchableOpacity, Text, Alert } from "react-native";
 import { Formik } from "formik";
 import * as yup from 'yup';
+import axios from "axios";
 
 import {styles} from "./styles";
 
@@ -30,14 +31,20 @@ const initialValues = { username: "", email: "", password: "", confirmPassword: 
 
 
 const Registration = ({ navigation }) => {
+  const registerUser = (name, email, password) => {
+    axios.post('http://0.0.0.0:4000/user/signup', {name, email, password})
+    .then(() => navigation.navigate('Login') )
+    .catch(() => Alert.alert('Error', 'This email address is already being used', 'Ok'))
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.headLine}>Registration</Text>
       <Formik
         initialValues={initialValues}
         onSubmit={values => {
-            console.log(values)
-            navigation.navigate('Login')
+            console.log(values.username, values.email, values.password)
+          const {username, email, password} = values
+          registerUser(username, email, password)
         }}
         validationSchema={signUpSchema}
 
